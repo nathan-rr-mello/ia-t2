@@ -2,7 +2,7 @@ public class Main {
 
     public static void main(String[] args) {
         
-        int[][] a = {
+        int[][] currentMatrix = {
             {1,2,3},
             {0,4,6},
             {7,5,8},
@@ -17,12 +17,9 @@ public class Main {
             {5,8,6}
         };
 
-        var bA = new Board(a);
-        var bB = new Board(targetMatrix);
 
-        //System.out.println(bA.equals(bB));
-
-        DFS.run(a, targetMatrix, emptyX, emptyY);
-        //BFS.run(a, targetMatrix, emptyX, emptyY);
+        //DFS.run(currentMatrix, targetMatrix, emptyX, emptyY);
+        //BFS.run(currentMatrix, targetMatrix, emptyX, emptyY);
+        GBFS.run(currentMatrix, targetMatrix, emptyX, emptyY);
     }
 }
