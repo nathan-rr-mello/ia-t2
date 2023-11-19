@@ -5,6 +5,7 @@ public class Board {
     int[][] state;
     int emptyX, emptyY;
     Board parent;
+    final static String[] target = {"00", "01", "02", "10", "11", "12", "20", "21"};
 
     private Board(int[][] state, int x, int y, Board parent) {
         this.state = state;
@@ -34,7 +35,7 @@ public class Board {
     private int[][] copyState() {
         int[][] copy = new int[state.length][state[0].length];
         for (var i = 0; i < state.length; i++) {
-            copy[i] = state[i].clone();
+            copy[i] = Arrays.copyOf(state[i], state[i].length);
         } 
 
         return copy;    
@@ -62,12 +63,12 @@ public class Board {
     }
 
     public boolean equals(Board b) {
-        if (b.state.length != state.length || b.state[0].length != state[0].length) {
+        if (b.state.length != this.state.length) {
             return false;
         }
 
         for (int i = 0; i < b.state.length; i++) {
-            if (!Arrays.equals(state[i], b.state[i])) {
+            if (!Arrays.equals(this.state[i], b.state[i])) {
                 return false;
             }
         }
@@ -109,4 +110,12 @@ public class Board {
         }
         return possibleStates;
     }
+
+    public static int desirePosition(int i, int x, int y) {
+        var goalX = Integer.parseInt(target[i-1].substring(0,1));
+        var goalY = Integer.parseInt(target[i-1].substring(1));
+        return Math.abs(goalX - x) + Math.abs(goalY - y);
+    }
+
+
 }
