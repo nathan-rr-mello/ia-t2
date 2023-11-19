@@ -7,20 +7,19 @@ public class GBFS {
         Board initialBoard = new Board(initialMatrix, x, y);
         Board finalState = new Board(finalMatrix);
         HashSet<Board> visited = new HashSet<>();
-
-        LinkedList<Board> queue = ordenaFuncaoHeuristica(Aux.getNextStates(initialBoard));
-
         int nodesCreated = 0;
+
+        LinkedList<Board> queue = ordenaFuncaoHeuristica(Board.getNextStates(initialBoard));
 
         while (!queue.isEmpty()) {
             Board curr = queue.removeFirst();
             if (curr.equals(finalState)) {
-                Aux.findPath(curr);
+                Board.findPath(curr);
                 System.out.println("nodes created: " + nodesCreated);
                 return;
             }
             if (!visited.contains(curr)) {
-                queue.addAll(ordenaFuncaoHeuristica(Aux.getNextStates(curr)));
+                queue.addAll(ordenaFuncaoHeuristica(Board.getNextStates(curr)));
             }
             visited.add(curr);
             nodesCreated++;
