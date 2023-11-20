@@ -5,26 +5,22 @@ public class AStar {
     Set<String> closed = new HashSet<String>();
     Board initialBoard = new Board(initialMatrix, x, y, 0, calculateMisplacedTiles(initialMatrix), null);
     Board finalState = new Board(finalMatrix);
+    boolean found = false;
 
     open.add(initialBoard);
     while (!open.isEmpty()) {
-        // System.out.println("entrou aqui, board atual:");
         
         Board currentBoard = open.poll();
-        // System.out.println(currentBoard);
         
 
         if (currentBoard.equals(finalState)) {
-            System.out.println("encerrei, nodes created: " + closed.size());
+            found = true;
+            System.out.println("\nnodes created: " + (closed.size() + open.size()));
+            System.out.println("\nCaminho percorrido: ");
             currentBoard.findPath(currentBoard);
             return;
         }
         closed.add(Arrays.deepToString(currentBoard.state));
-        // System.out.println("closed: " + closed.size());
-        // for(Board fechado : closed){
-        //     System.out.println(fechado);
-        // }
-        // System.out.println("filhos:");
 
         List<Board> nextStates = Board.getNextStates(currentBoard);
         for (Board nextBoard : nextStates) {
@@ -42,6 +38,10 @@ public class AStar {
 
         // System.out.println("----------------------");
     }
+    if (!found){
+        System.out.println("Não foi possível encontrar uma solução");
+    }
+
     }
 
     public static int calculateMisplacedTiles(int receivedMatrix[][]) {
