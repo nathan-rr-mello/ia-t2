@@ -123,5 +123,20 @@ public class Board {
         return Math.abs(goalX - x) + Math.abs(goalY - y);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Board other = (Board) obj;
+        return Arrays.deepEquals(this.state, other.state) && this.emptyX == other.emptyX && this.emptyY == other.emptyY;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(Arrays.deepHashCode(this.state), this.emptyX, this.emptyY);
+    }
 }
