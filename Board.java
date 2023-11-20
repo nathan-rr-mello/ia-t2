@@ -1,11 +1,27 @@
 import java.util.Arrays;
 import java.util.LinkedList;
 
+import org.w3c.dom.Node;
+
 public class Board {
     int[][] state;
     int emptyX, emptyY;
     Board parent;
     final static String[] target = {"00", "01", "02", "10", "11", "12", "20", "21"};
+
+    int costFromStart = 0; //variaveis para o A*
+    int estimatedHeuristic = 0;
+    int estimatedTotalCost = 0;
+
+    public Board(int state[][], int x, int y, int costFromStart, int estimatedHeuristic, Board parent) {
+        this.state = state;
+        this.costFromStart = costFromStart;
+        this.estimatedHeuristic = estimatedHeuristic;
+        this.estimatedTotalCost = costFromStart + estimatedHeuristic;
+        this.parent = parent;
+        this.emptyX = x;
+        this.emptyY = y;
+    }
 
     private Board(int[][] state, int x, int y, Board parent) {
         this.state = state;
