@@ -53,9 +53,9 @@ public class Main {
             {7,8,0}
         };
 
-        AStar.run(currentMatrix, targetMatrix, emptyX, emptyY);
+        //AStar.run(currentMatrix, targetMatrix, emptyX, emptyY);
         //BFS.run(currentMatrix, targetMatrix, emptyX, emptyY);
-        //DFS.run(currentMatrix, targetMatrix, emptyX, emptyY);
+        DFS.run(currentMatrix, targetMatrix, emptyX, emptyY);
         // GBFS.run(currentMatrix, targetMatrix, emptyX, emptyY);
     }
 }

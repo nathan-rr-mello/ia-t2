@@ -1,65 +1,92 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-
+import java.util.*;
 public class DFS {
+    
+    public static void run(int[][] initialMatrix, int[][] finalMatrix, int x, int y) {
 
-    public static void run (int[][] initialMatrix, int[][] finalMatrix, int x, int y) {
-
-        Board intialState = new Board(initialMatrix, x, y);
+        Board initialBoard = new Board(initialMatrix, x, y);
         Board finalState = new Board(finalMatrix);
         HashSet<Board> visited = new HashSet<>();
-        visited.add(intialState);
 
-        searchState(intialState, finalState, visited);
-    }
+        Stack<Board> toBeVisited = getNextStates(initialBoard);
+        // System.out.println("toBeVisited");
+        // System.out.println(toBeVisited);
 
-    private static boolean searchState(Board start, Board target, HashSet<Board> visited) {
+        int totalNodes = 0;
 
-        System.out.println(start);
-        /* if (visited.contains(start)) {
-            return false;
-        } */
+        while (!toBeVisited.isEmpty()) {
+            Board curr = toBeVisited.pop();
 
-        visited.add(start);
+            // System.out.println("Current State:");
+            // System.out.println(curr);
+            if (curr.equals(finalState)) {
+                System.out.println("Encontrou!");
+                System.out.printf("\nNumber of nodes created: %d\n", totalNodes);
+                System.out.println("Target:");
+                System.out.println(curr);
+                findPath(curr);
+                return;
+            }
+            if (!visited.contains(curr)) {
+                Stack<Board> elementsToAdd = getNextStates(curr);
+                for (Board element : elementsToAdd) {
+                    toBeVisited.push(element);
+                }
 
-        if (start.equals(target)) {
-            //(print result)
-            System.out.println("achou");
-            return true;
-        }
-
-        List<Board> possibleStates = new ArrayList<>();
-
-        //can move down?
-        if (start.emptyX < start.state.length - 1) {
-            var b = start.switchEmpty(start.emptyX+1, start.emptyY);
-            if (!visited.contains(b)) possibleStates.add(b);
-        }
-        //can move right?
-        if (start.emptyY < start.state[0].length - 1) {
-            var b = start.switchEmpty(start.emptyX, start.emptyY+1);
-            if (!visited.contains(b)) possibleStates.add(b);
-        }
-        //can move left?
-        if (start.emptyY > 0) {
-            var b = start.switchEmpty(start.emptyX, start.emptyY-1);
-            if (!visited.contains(b)) possibleStates.add(b);
-        }//can move up?
-        if (start.emptyX > 0) {
-            var b = start.switchEmpty(start.emptyX-1, start.emptyY);
-            if (!visited.contains(b)) possibleStates.add(b);
-        }
-        
-        System.out.println(start);
-        System.out.println(possibleStates);
-
-        for (var b : possibleStates) {
-            if (searchState(b, target, visited)) {
-                return true;
+                visited.add(curr);
+                totalNodes += elementsToAdd.size();
+            }
+            else if(visited.contains(curr)) {
+                continue;
+                //System.out.println("visited:");
+                //toBeVisited.pop();
+                // visited.clear();
+                //System.out.println(visited);
+                //toBeVisited.remove(curr.parent);
             }
         }
+    }
 
-        return false;
+    private static Stack<Board> getNextStates(Board current) {
+        Stack<Board> possibleStates = new Stack<Board>();
+
+        //can move down?
+        if (current.emptyX < current.state.length - 1) {
+            var b = current.switchEmpty(current.emptyX+1, current.emptyY);
+            possibleStates.add(b);
+        }
+        //can move right?
+        if (current.emptyY < current.state[0].length - 1) {
+            var b = current.switchEmpty(current.emptyX, current.emptyY+1);
+            possibleStates.add(b);
+        }
+        //can move left?
+        if (current.emptyY > 0) {
+            var b = current.switchEmpty(current.emptyX, current.emptyY-1);
+            possibleStates.add(b);
+        }//can move up?
+        if (current.emptyX > 0) {
+            var b = current.switchEmpty(current.emptyX-1, current.emptyY);
+            possibleStates.add(b);
+        }
+        return possibleStates;
+    }
+
+    private static void findPath(Board board) {
+        if (board == null) {
+            return;
+        }
+
+        // findPath(board.parent);
+        // System.out.println("board");
+        // System.out.println(board);
+
+        System.out.println("States until target:");
+        while (board.parent != null) {
+            System.out.println(board.parent.toString());
+            // System.out.println("---------");
+            board = board.parent;
+        }
+        // System.out.println("Target:");
+        // System.out.println(board.toString());
     }
 }
