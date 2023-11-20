@@ -1,4 +1,5 @@
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
@@ -21,10 +22,11 @@ public class GBFS {
                 return;
             }
             if (!visited.contains(currentBoard)) {
-                queue.add(ordenaFuncaoHeuristica(Board.getNextStates(currentBoard), currentBoard));
+                var teste = Board.getNextStates(currentBoard);
+                queue.add(ordenaFuncaoHeuristica(teste, currentBoard));
+                nodesCreated += teste.size();
             }
             visited.add(currentBoard);
-            nodesCreated++;
             System.out.println(currentBoard);
         }
     }
@@ -44,6 +46,7 @@ public class GBFS {
 
     private static Board ordenaFuncaoHeuristica(LinkedList<Board> possibleStates, Board current) {
         possibleStates.sort(Comparator.comparingInt(GBFS::funcaoHeuristica));
+        //if (possibleStates.get(0) current.)
         if (current.parent != null && possibleStates.get(0).equals(current.parent)){
             return possibleStates.get(1);
         }
