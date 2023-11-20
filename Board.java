@@ -13,16 +13,6 @@ public class Board {
     int estimatedHeuristic = 0;
     int estimatedTotalCost = 0;
 
-    public Board(int state[][], int x, int y, int costFromStart, int estimatedHeuristic, Board parent) {
-        this.state = state;
-        this.costFromStart = costFromStart;
-        this.estimatedHeuristic = estimatedHeuristic;
-        this.estimatedTotalCost = costFromStart + estimatedHeuristic;
-        this.parent = parent;
-        this.emptyX = x;
-        this.emptyY = y;
-    }
-
     private Board(int[][] state, int x, int y, Board parent) {
         this.state = state;
         this.emptyX = x;

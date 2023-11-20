@@ -3,9 +3,10 @@ public class AStar {
     public static void run (int[][] initialMatrix, int[][] finalMatrix, int x, int y) {
     PriorityQueue<Board> open = new PriorityQueue<Board>(Comparator.comparingInt(board -> board.estimatedTotalCost));
     Set<String> closed = new HashSet<String>();
-    Board initialBoard = new Board(initialMatrix, x, y, 0, calculateMisplacedTiles(initialMatrix), null);
+    Board initialBoard = new Board(initialMatrix, x, y);
     Board finalState = new Board(finalMatrix);
     boolean found = false;
+    //  0, calculateMisplacedTiles(initialMatrix),
 
     open.add(initialBoard);
     while (!open.isEmpty()) {
@@ -16,7 +17,7 @@ public class AStar {
         if (currentBoard.equals(finalState)) {
             found = true;
             System.out.println("\nnodes created: " + (closed.size() + open.size()));
-            System.out.println("\nCaminho percorrido: ");
+            System.out.println("\nPath generated: ");
             currentBoard.findPath(currentBoard);
             return;
         }
