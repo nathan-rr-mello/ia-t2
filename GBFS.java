@@ -8,17 +8,19 @@ public class GBFS {
 
         Board initialBoard = new Board(initialMatrix, x, y);
         Board finalState = new Board(finalMatrix);
+
         List<Board> visited = new ArrayList<>();
-        int nodesCreated = 0;
         LinkedList<Board> queue = new LinkedList<>();
 
-        queue.add(ordenaFuncaoHeuristicaFirst(Board.getNextStates(initialBoard), initialBoard));
+        int nodesCreated = 0;
+
+        queue.add(ordenaFuncaoHeuristica(Board.getNextStates(initialBoard)).get(0));
 
         while (!queue.isEmpty()) {
             Board currentBoard = queue.removeFirst();
 
             if (currentBoard.equals(finalState)) {
-                System.out.println(currentBoard);
+                Board.findPath(currentBoard);
                 System.out.println("nodes created: " + nodesCreated);
                 return;
             }
@@ -29,13 +31,12 @@ public class GBFS {
                 var nextStates = Board.getNextStates(currentBoard);
                 nodesCreated += nextStates.size();
 
-                for (Board nextState : ordenaFuncaoHeuristicaAll(nextStates)) {
+                for (Board nextState : ordenaFuncaoHeuristica(nextStates)) {
                     if (!visited.contains(nextState)) {
                         queue.add(nextState);
                     }
                 }
             }
-            System.out.println(currentBoard);
         }
     }
 
@@ -52,15 +53,7 @@ public class GBFS {
         return distance;
     }
 
-    private static Board ordenaFuncaoHeuristicaFirst(LinkedList<Board> possibleStates, Board current) {
-        possibleStates.sort(Comparator.comparingInt(GBFS::funcaoHeuristica));
-        if (current.parent != null && possibleStates.get(0).equals(current.parent)){
-            return possibleStates.get(1);
-        }
-        return possibleStates.get(0);
-    }
-
-    private static LinkedList<Board> ordenaFuncaoHeuristicaAll(LinkedList<Board> possibleStates) {
+    private static LinkedList<Board> ordenaFuncaoHeuristica(LinkedList<Board> possibleStates) {
         possibleStates.sort(Comparator.comparingInt(GBFS::funcaoHeuristica));
         return possibleStates;
     }
