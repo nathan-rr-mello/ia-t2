@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import org.w3c.dom.Node;
 
-public class Board {
+public class Board { //classe que representa o estado do jogo
     int[][] state;
     int emptyX, emptyY;
     Board parent;
@@ -39,7 +39,7 @@ public class Board {
         }
     }
 
-    private int[][] copyState() {
+    private int[][] copyState() { //metodo que copia o estado atual, para que ele possa ser alterado sem alterar o estado do nodo pai
         int[][] copy = new int[state.length][state[0].length];
         for (var i = 0; i < state.length; i++) {
             copy[i] = Arrays.copyOf(state[i], state[i].length);
@@ -48,7 +48,7 @@ public class Board {
         return copy;    
     }
 
-    public Board switchEmpty(int x, int y) {
+    public Board switchEmpty(int x, int y) { //metodo que troca a casa vazia com uma casa
         var copy =  copyState();
         int elem = copy[x][y];
         copy[x][y] = 0;
@@ -56,11 +56,11 @@ public class Board {
         return new Board(copy, x, y, this);
     }
 
-    public Board clone() {
+    public Board clone() { //metodo que clona o estado atual
         return new Board(copyState(), emptyX, emptyY);
     }
 
-    public String toString() {
+    public String toString() { //metodo para imprimir corretamente o estado atual
         StringBuilder builder = new StringBuilder();
         for (int[] line : state) {
             builder.append(Arrays.toString(line));
@@ -69,7 +69,7 @@ public class Board {
         return builder.toString();
     }
 
-    public boolean equals(Board b) {
+    public boolean equals(Board b) { //metodo que testa igualdade de dois estados
         if (b.state.length != this.state.length) {
             return false;
         }
@@ -83,7 +83,7 @@ public class Board {
         return true;
     }
 
-    //metodo recursivo que acha o caminho completo do ultimo nodo
+    //metodo recursivo que acha o caminho completo do ultimo nodo e imprime no terminal
     public static void findPath(Board board) {
         if (board == null) {
             return;
