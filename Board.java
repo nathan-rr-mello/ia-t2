@@ -14,6 +14,7 @@ public class Board { //classe que representa o estado do jogo
     int estimatedHeuristic = 0;
     int estimatedTotalCost = 0;
 
+    //utilizado para determinar o pai e o filho sempre que cria um novo board
     private Board(int[][] state, int x, int y, Board parent) {
         this.state = state;
         this.emptyX = x;
@@ -21,12 +22,14 @@ public class Board { //classe que representa o estado do jogo
         this.parent = parent;
     }
 
+    //cria o board quando tem a posicao X e Y do 0
     Board(int[][] state, int x, int y) {
         this.state = state;
         this.emptyX = x;
         this.emptyY = y;
     }
 
+    //cria o board quando nao tem a posicao X e Y do 0
     Board(int[][] state) {
         this.state = state;
         for (int i = 0; i < state.length; i++) {
