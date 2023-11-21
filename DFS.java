@@ -5,20 +5,16 @@ public class DFS {
 
         Board initialBoard = new Board(initialMatrix, x, y);
         Board finalState = new Board(finalMatrix);
-        HashSet<Board> visited = new HashSet<>();
+        HashSet<Board> visited = new HashSet<>(); // hashset que guarda os estados já visitados
 
-        Stack<Board> toBeVisited = getNextStates(initialBoard);
-        // System.out.println("toBeVisited");
-        // System.out.println(toBeVisited);
+        Stack<Board> toBeVisited = getNextStates(initialBoard); // pilha que guarda os estados possíveis a serem visitados
 
-        int totalNodes = 0;
+        int totalNodes = 0; // variável para guardar a quantidade total de nodos criados
 
         while (!toBeVisited.isEmpty()) {
-            Board curr = toBeVisited.pop();
+            Board curr = toBeVisited.pop(); // se acordo com a política LIFO, visita o elemento do topo da pilha
 
-            // System.out.println("Current State:");
-            // System.out.println(curr);
-            if (curr.equals(finalState)) {
+            if (curr.equals(finalState)) { // se o estado atual for igual ao target, procura a sequência de estados que levam até ele
                 System.out.println("Encontrou!");
                 System.out.printf("\nNumber of nodes created: %d\n", totalNodes);
                 System.out.println("Target:");
@@ -26,27 +22,22 @@ public class DFS {
                 findPath(curr);
                 return;
             }
-            if (!visited.contains(curr)) {
+            if (!visited.contains(curr)) { // se ainda não visitou o estado atual, procura os estados possíveis e os adiciona na pilha dos nodos a serem explorados
                 Stack<Board> elementsToAdd = getNextStates(curr);
                 for (Board element : elementsToAdd) {
                     toBeVisited.push(element);
                 }
 
-                visited.add(curr);
-                totalNodes += elementsToAdd.size();
+                visited.add(curr); // adiciona o estado atual no set de estados já visitados
+                totalNodes += elementsToAdd.size(); // incrementa os nodos criados
             }
-            else if(visited.contains(curr)) {
+            else { // não explora se já passou pelo estado atual
                 continue;
-                //System.out.println("visited:");
-                //toBeVisited.pop();
-                // visited.clear();
-                //System.out.println(visited);
-                //toBeVisited.remove(curr.parent);
             }
         }
     }
 
-    private static Stack<Board> getNextStates(Board current) {
+    private static Stack<Board> getNextStates(Board current) { // função que devolve os estados possíveis a serem explorados a partir do estado atual
         Stack<Board> possibleStates = new Stack<Board>();
 
         //can move down?
@@ -71,22 +62,16 @@ public class DFS {
         return possibleStates;
     }
 
-    private static void findPath(Board board) {
+    private static void findPath(Board board) { // função para printar a sequência de estados que levam até o estado resposta
         if (board == null) {
             return;
         }
 
-        // findPath(board.parent);
-        // System.out.println("board");
-        // System.out.println(board);
-
         System.out.println("States until target:");
         while (board.parent != null) {
             System.out.println(board.parent.toString());
-            // System.out.println("---------");
             board = board.parent;
         }
-        // System.out.println("Target:");
-        // System.out.println(board.toString());
+       
     }
 }
