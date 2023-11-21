@@ -1,5 +1,21 @@
 public class Main {
 
+    static void solveBreadthFirst(int[][] initialMatrix, int[][] finalMatrix, int x, int y) {
+        BFS.run(initialMatrix, finalMatrix, x, y);
+    }
+
+    static void solveDepthFirst(int[][] initialMatrix, int[][] finalMatrix, int x, int y) {
+        DFS.run(initialMatrix, finalMatrix, x, y);
+    }
+
+    static void solveGreedyBestFirst(int[][] initialMatrix, int[][] finalMatrix, int x, int y) {
+        GBFS.run(initialMatrix, finalMatrix, x, y);
+    }
+
+    static void solveAStar(int[][] initialMatrix, int[][] finalMatrix, int x, int y) {
+        AStar.run(initialMatrix, finalMatrix, x, y);
+    }
+
     public static void main(String[] args) {
        // tabela 1
     //    int[][] currentMatrix = {
