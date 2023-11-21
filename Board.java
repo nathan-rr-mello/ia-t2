@@ -132,6 +132,7 @@ public class Board { //classe que representa o estado do jogo
         return Math.abs(goalX - x) + Math.abs(goalY - y);
     }
 
+    // override equals() e hashCode() para comparar e armazenar corretamente com HashSet
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
