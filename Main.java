@@ -2,13 +2,13 @@ public class Main {
 
     public static void main(String[] args) {
        // tabela 1
-    //    int[][] currentMatrix = {
-    //            {1,2,3},
-    //            {4,5,6},
-    //            {0,7,8},
-    //    };
-    //    int emptyX = 2;
-    //    int emptyY = 0;
+       int[][] currentMatrix = {
+               {1,2,3},
+               {4,5,6},
+               {0,7,8},
+       };
+       int emptyX = 2;
+       int emptyY = 0;
 //
        // tabela 2
     //    int[][] currentMatrix = {
@@ -38,13 +38,13 @@ public class Main {
     //    int emptyY = 2;
 //
 //        // tabela 5
-       int[][] currentMatrix = {
-               {1,2,3},
-               {7,0,6},
-               {4,8,5},
-       };
-       int emptyX = 1;
-       int emptyY = 1;
+    //    int[][] currentMatrix = {
+    //            {1,2,3},
+    //            {7,0,6},
+    //            {4,8,5},
+    //    };
+    //    int emptyX = 1;
+    //    int emptyY = 1;
 
 
         int[][] targetMatrix = {
@@ -53,8 +53,8 @@ public class Main {
             {7,8,0}
         };
 
-        //AStar.run(currentMatrix, targetMatrix, emptyX, emptyY);
-        //BFS.run(currentMatrix, targetMatrix, emptyX, emptyY);
+        // AStar.run(currentMatrix, targetMatrix, emptyX, emptyY);
+        // BFS.run(currentMatrix, targetMatrix, emptyX, emptyY);
         DFS.run(currentMatrix, targetMatrix, emptyX, emptyY);
         // GBFS.run(currentMatrix, targetMatrix, emptyX, emptyY);
     }

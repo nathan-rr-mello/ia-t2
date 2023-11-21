@@ -17,9 +17,8 @@ public class DFS {
             if (curr.equals(finalState)) { // se o estado atual for igual ao target, procura a sequência de estados que levam até ele
                 System.out.println("Encontrou!");
                 System.out.printf("\nNumber of nodes created: %d\n", totalNodes);
-                System.out.println("Target:");
-                System.out.println(curr);
-                findPath(curr);
+                System.out.println("Path to taget:");
+                Board.findPath(curr);
                 return;
             }
             if (!visited.contains(curr)) { // se ainda não visitou o estado atual, procura os estados possíveis e os adiciona na pilha dos nodos a serem explorados
