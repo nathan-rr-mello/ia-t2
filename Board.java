@@ -83,6 +83,7 @@ public class Board {
         return true;
     }
 
+    //metodo recursivo que acha o caminho completo do ultimo nodo
     public static void findPath(Board board) {
         if (board == null) {
             return;
@@ -93,6 +94,7 @@ public class Board {
         System.out.println(board);
     }
 
+    //metodo que calcula os proximos estados do board com base no estado atual
     public static LinkedList<Board> getNextStates(Board current) {
         LinkedList<Board> possibleStates = new LinkedList<>();
         //can move down?
@@ -118,9 +120,12 @@ public class Board {
         return possibleStates;
     }
 
+    //metodo que calcula a posicao desejada
     public static int desirePosition(int i, int x, int y) {
+        //variaveis que calculam a posicao desejada
         var goalX = Integer.parseInt(target[i-1].substring(0,1));
         var goalY = Integer.parseInt(target[i-1].substring(1));
+        //retorna a posicao desejada - a posicao atual
         return Math.abs(goalX - x) + Math.abs(goalY - y);
     }
 
