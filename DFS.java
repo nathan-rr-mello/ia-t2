@@ -10,15 +10,16 @@ public class DFS {
         Stack<Board> toBeVisited = getNextStates(initialBoard); // pilha que guarda os estados possíveis a serem visitados
 
         int totalNodes = 0; // variável para guardar a quantidade total de nodos criados
+        totalNodes++; //adiciona o estado inicial na contagem de nodos criados
 
         while (!toBeVisited.isEmpty()) {
             Board curr = toBeVisited.pop(); // se acordo com a política LIFO, visita o elemento do topo da pilha
 
             if (curr.equals(finalState)) { // se o estado atual for igual ao target, procura a sequência de estados que levam até ele
                 System.out.println("Encontrou!");
-                System.out.printf("\nNumber of nodes created: %d\n", totalNodes);
                 System.out.println("Path to taget:");
-                Board.findPath(curr);
+                //Board.findPath(curr);
+                System.out.printf("\nNumber of nodes created: %d\n", totalNodes);
                 return;
             }
             if (!visited.contains(curr)) { // se ainda não visitou o estado atual, procura os estados possíveis e os adiciona na pilha dos nodos a serem explorados

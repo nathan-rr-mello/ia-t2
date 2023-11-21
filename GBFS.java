@@ -14,6 +14,7 @@ public class GBFS {
         LinkedList<Board> queue = new LinkedList<>();
 
         int nodesCreated = 0;
+        nodesCreated++; //adiciona o estado inicial na contagem de nodos criados
 
         //adiciona o board inicial
         queue.add(ordenaFuncaoHeuristica(Board.getNextStates(initialBoard)).get(0));

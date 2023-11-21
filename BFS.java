@@ -11,7 +11,8 @@ public class BFS {
         int nodesCreated = 0;
 
         LinkedList<Board> queue = Board.getNextStates(initialBoard);
-
+        nodesCreated++; //adiciona o estado inicial na contagem de nodos criados
+        
         while (!queue.isEmpty()) {
             Board curr = queue.removeFirst();
             if (curr.equals(finalState)) {
@@ -20,10 +21,12 @@ public class BFS {
                 return;
             }
             if (!visited.contains(curr)) {
-                queue.addAll(Board.getNextStates(curr));
+                LinkedList<Board> nextStates = Board.getNextStates(curr);
+                nodesCreated += nextStates.size();
+                queue.addAll(nextStates);
             }
             visited.add(curr);
-            nodesCreated++;
+            // nodesCreated++;
         }
     }
 

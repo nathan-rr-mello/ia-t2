@@ -16,9 +16,10 @@ public class AStar {
         
 
         if (currentBoard.equals(finalState)) { //testa se é a solução correta, se for: 
-            System.out.println("\nnodes created: " + (closed.size() + open.size())); //imprime o número de nodos criados
+           
             System.out.println("\nPath generated: "); //imprime o caminho gerado
-            currentBoard.findPath(currentBoard);
+            Board.findPath(currentBoard);
+            System.out.println("\nnodes created: " + (closed.size() + open.size())); //imprime o número de nodos criados
             return; //finaliza a execução
         } // e se não: 
 
